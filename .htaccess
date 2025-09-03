@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# Handle requests for the root directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Security: Deny access to sensitive files
+<Files "*.sql">
+    Require all denied
+</Files>
+
+<Files "config/*.php">
+    Require all denied
+</Files>
+
+# Optional: Force HTTPS (uncomment if needed)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
