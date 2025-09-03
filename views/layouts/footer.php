@@ -4,7 +4,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
-				<p class="text-muted mb-0">&copy; 2025 MVC Demo. Simple User Management System.</p>
+				<p class="text-muted mb-0">&copy; 2025 MVC Demo. <strong>Author: <a href="https://github.com/sazid-uddin"
+						target="_blank">Md. Sazid Uddin</a></strong></p>
 			</div>
 			<div class="col-md-6 text-end">
 				<p class="text-muted mb-0">Built with PHP, MySQL & Bootstrap</p>
