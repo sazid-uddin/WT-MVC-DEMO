@@ -16,6 +16,32 @@ class UserController
 		$this->loadView('users/index', ['users' => $users]);
 	}
 
+	public function login()
+	{
+		$this->loadView('users/login');
+	}
+
+	public function authenticate()
+	{
+		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+			header('Location: /mvc/login');
+			exit;
+		}
+
+		$email = trim($_POST['email'] ?? '');
+		$password = trim($_POST['password'] ?? '');
+
+		$authentincated = $this->userModel->checkLogin($email, $password);
+		if($authentincated) {
+			session_start();
+			$_SESSION['login_status'] = 'logged_in';
+			header('Location: /mvc/');
+			exit;
+		} else {
+			$this->loadView('users/login', ['error' => 'Invalid email or password.']);
+			exit;
+		}
+	}
 	public function create()
 	{
 		$this->loadView('users/create');

@@ -9,14 +9,24 @@ try {
 
 	// Route to UserController
 	require_once 'controllers/UserController.php';
-	$controller = new UserController();
+	$userController = new UserController();
 
-	if (method_exists($controller, $action)) {
-		$controller->$action();
+	if ($action === 'index') {
+		$userController->index();
+	} elseif ($action === 'login') {
+		$userController->login();
+	} elseif ($action === 'authenticate') {
+		$userController->authenticate();
+	} elseif ($action === 'create') {
+		$userController->create();
+	} elseif ($action === 'store') {
+		$userController->store();
 	} else {
 		http_response_code(404);
 		include 'views/errors/404.php';
 	}
+
+
 } catch (Exception $e) {
 	http_response_code(500);
 	error_log("MVC Error: " . $e->getMessage());

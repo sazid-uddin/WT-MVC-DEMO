@@ -45,6 +45,17 @@ class User
 		return false;
 	}
 
+	public function checkLogin($email, $password)
+	{
+		$query = "SELECT * FROM users WHERE email = ? AND password = ?";
+		$stmt = $this->connection->prepare($query);
+		$stmt->bind_param("ss", $email, $password);
+		$stmt->execute();
+
+		$result = $stmt->get_result();
+		return $result->num_rows > 0;
+	}
+
 	public function validate($data)
 	{
 		$errors = [];

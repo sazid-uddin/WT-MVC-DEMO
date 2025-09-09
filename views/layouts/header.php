@@ -44,6 +44,7 @@
 			<div class="navbar-nav ms-auto">
 				<a class="nav-link" href="/mvc/">Users List</a>
 				<a class="nav-link" href="/mvc/create">Add User</a>
+				<a class="nav-link" href="/mvc/login">Login</a>
 			</div>
 		</div>
 	</nav>
