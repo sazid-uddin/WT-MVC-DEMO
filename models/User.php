@@ -47,12 +47,18 @@ class User
 
 	public function checkLogin($email, $password)
 	{
-		$query = "SELECT * FROM users WHERE email = ? AND password = ?";
-		$stmt = $this->connection->prepare($query);
-		$stmt->bind_param("ss", $email, $password);
-		$stmt->execute();
+		// $query = "SELECT * FROM users WHERE email = $email and password = $password";
 
-		$result = $stmt->get_result();
+		// step 1: write the query with placeholders
+		$query = "SELECT * FROM users WHERE email = ? AND password = ?";
+		// step 2: prepare the statement
+		$prepared_statement = $this->connection->prepare($query);
+		// step 3: bind the parameters
+		$prepared_statement->bind_param("ss", $email, $password);
+		// step 4: execute the statement
+		$prepared_statement->execute();
+		// step 5: get the result
+		$result = $prepared_statement->get_result();
 		return $result->num_rows > 0;
 	}
 

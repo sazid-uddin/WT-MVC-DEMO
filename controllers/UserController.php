@@ -81,8 +81,6 @@ class UserController
 
 		if ($userId) {
 			// Set success message in session
-			session_start();
-			$_SESSION['success'] = 'User created successfully!';
 			header('Location: /mvc/');
 			exit;
 		} else {
