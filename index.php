@@ -2,6 +2,17 @@
 // Simple router implementation
 
 try {
+	// check if request is for API
+	$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+	$is_api = str_contains($path, 'api');
+
+	if ($is_api) {
+		if (str_contains($path,'api/users')) {
+			require_once 'api/users.php';
+			exit();
+		}
+	}
+
 	// Get path and remove base path
 	$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 	$path = ltrim(str_replace('/mvc', '', $path), '/');
@@ -25,8 +36,6 @@ try {
 		http_response_code(404);
 		include 'views/errors/404.php';
 	}
-
-
 } catch (Exception $e) {
 	http_response_code(500);
 	error_log("MVC Error: " . $e->getMessage());

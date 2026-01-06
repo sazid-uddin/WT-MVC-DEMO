@@ -10,6 +10,7 @@ if (isset($_SESSION['success'])): ?>
 	</div>
 	<?php unset($_SESSION['success']); ?>
 <?php endif; ?>
+<script src="views/users/user-api.js"></script>
 
 <div class="row">
 	<div class="col-12">
@@ -23,71 +24,35 @@ if (isset($_SESSION['success'])): ?>
 				</a>
 			</div>
 			<div class="card-body">
-				<?php if (empty($users)): ?>
-					<div class="text-center py-5">
-						<div class="mb-3">
-							<i class="fas fa-users fa-3x text-muted"></i>
-						</div>
-						<h4 class="text-muted">No users found</h4>
-						<p class="text-muted">Start by adding your first user to the system.</p>
-						<a href="/mvc/create" class="btn btn-primary">
-							<i class="fas fa-plus"></i> Add First User
-						</a>
-					</div>
-				<?php else: ?>
-					<div class="table-responsive">
-						<table class="table table-hover table-striped">
-							<thead class="table-dark">
-								<tr>
-									<th>ID</th>
-									<th>Name</th>
-									<th>Email</th>
-									<th>Phone</th>
-									<th>Created At</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php foreach ($users as $user): ?>
-									<tr>
-										<td>
-											<span class="badge bg-secondary"><?php echo htmlspecialchars($user['id']); ?></span>
-										</td>
-										<td>
-											<strong><?php echo htmlspecialchars($user['name']); ?></strong>
-										</td>
-										<td>
-											<a href="mailto:<?php echo htmlspecialchars($user['email']); ?>"
-												class="text-decoration-none">
-												<?php echo htmlspecialchars($user['email']); ?>
-											</a>
-										</td>
-										<td>
-											<?php if (!empty($user['phone'])): ?>
-												<a href="tel:<?php echo htmlspecialchars($user['phone']); ?>"
-													class="text-decoration-none">
-													<?php echo htmlspecialchars($user['phone']); ?>
-												</a>
-											<?php else: ?>
-												<span class="text-muted">Not provided</span>
-											<?php endif; ?>
-										</td>
-										<td>
-											<small class="text-muted">
-												<?php echo date('M j, Y \a\t g:i A', strtotime($user['created_at'])); ?>
-											</small>
-										</td>
-									</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
-					</div>
+				<div class="table-responsive">
+					<table class="table table-hover table-striped">
+						<thead class="table-dark">
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone</th>
+								<th>Created At</th>
+							</tr>
+						</thead>
+						<tbody id="users-table-body">
+							<tr>
+								<td colspan="5" class="text-center">
+									<div class="spinner-border spinner-border-sm" role="status">
+										<span class="visually-hidden">Loading...</span>
+									</div>
+									<span class="ms-2">Loading users...</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
-					<div class="mt-3">
-						<small class="text-muted">
-							Total users: <strong><?php echo count($users); ?></strong>
-						</small>
-					</div>
-				<?php endif; ?>
+				<div class="mt-3">
+					<small class="text-muted" id="users-count">
+						Total users: <strong>0</strong>
+					</small>
+				</div>
 			</div>
 		</div>
 	</div>

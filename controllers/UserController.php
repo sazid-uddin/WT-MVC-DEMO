@@ -12,8 +12,8 @@ class UserController
 
 	public function index()
 	{
-		$users = $this->userModel->getAll();
-		$this->loadView('users/index', ['users' => $users]);
+		// $users = $this->userModel->getAll();
+		$this->loadView('users/index');
 	}
 
 	public function login()
